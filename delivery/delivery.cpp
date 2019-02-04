@@ -96,7 +96,9 @@ int main(int argc, const char * argv[]) {
             }
         }
     }
+    cout << "hi" << endl;
     return 0;
+
 }
 
 
