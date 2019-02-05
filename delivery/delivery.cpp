@@ -95,7 +95,7 @@ int main(int argc, const char * argv[]) {
                     f1 = true;
 
                 }
-                if ((max(x1, x2)>=x3 && y3 == y1 && min(x1, x2)<=x3) || (x1 == x2 && max(y1, y2)>=y3 && min(y1, y2)<=y3)) { // TO EDIT
+                if ((max(x1, x2)>=x3 && y3 == y1 && min(x1, x2)<=x3) || (x3 == x2 && max(y1, y2)>=y3 && min(y1, y2)<=y3)) { // TO EDIT
                     f2 = true;
                 }
             }
