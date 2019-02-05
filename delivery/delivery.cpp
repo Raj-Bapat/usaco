@@ -91,15 +91,16 @@ int main(int argc, const char * argv[]) {
                 if ((x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3)) {
                     continue;
                 }
-                if (max(x1, x2)>=x3 && y1 == y2 && min(x1, x2)<=x3) {
+                if ((max(x1, x2)>=x3 && y3 == y2 && min(x1, x2)<=x3) || (x1 == x3 && max(y1, y2)>=y3 && min(y1, y2)<=y3)) { // TO EDIT
                     f1 = true;
 
                 }
-                if (max(y1, y2)>=y3 && x1 == x2 && min(y1, y2)<=y3) {
+                if ((max(x1, x2)>=x3 && y3 == y1 && min(x1, x2)<=x3) || (x1 == x2 && max(y1, y2)>=y3 && min(y1, y2)<=y3)) { // TO EDIT
                     f2 = true;
                 }
             }
-            if (!(f1 && f2)) {
+            int totint = f1+f2;
+            if (totint<2 && !((x1 == x2 || y1 == y2) && totint>=1)) {
             	adj[i][j] = abs(x1-x2)+abs(y1-y2);
             	adj[j][i] = adj[i][j];
             }
