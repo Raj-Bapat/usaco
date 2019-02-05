@@ -44,11 +44,17 @@ struct pair_hash {
 std::unordered_set< std::pair<int, int>,  pair_hash> pts;
 
 bool checkpt(pair<int, int> a) {return pts.find(a) == pts.end();}
-int adj[510];
+int adj[510][510];
 
 int main(int argc, const char * argv[]) {
     ios_base :: sync_with_stdio(false);
     cin.tie(nullptr);
+    for (int i = 0; i<510; i++) {
+    	for (int j = 0; j<510; j++) {
+    		adj[i][j] = numeric_limits<int>::max();
+    		adj[i][i] = 0;
+    	}
+    }
     cin >> N;
     for (int i = 0; i<N; i++) {
         cin >> cowpts[i].first >> cowpts[i].second;
@@ -79,26 +85,27 @@ int main(int argc, const char * argv[]) {
     for (int i = 0; i<K; i++) {
         for (int j = i+1; j<K; j++) {
             int x1 = cowpts[i].first, y1 = cowpts[i].second, x2 = cowpts[j].first, y2 = cowpts[j].second;
-            for (int k = 0; k<K; k++) {
+            bool f1 = false, f2 = false;
+            for (int k = 0; k<N; k++) {
                 int x3 = cowpts[k].first, y3 = cowpts[k].second;
                 if ((x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3)) {
                     continue;
                 }
-                bool added = false;
                 if (max(x1, x2)>=x3 && y1 == y2 && min(x1, x2)<=x3) {
-                    added = true;
+                    f1 = true;
 
                 }
                 if (max(y1, y2)>=y3 && x1 == x2 && min(y1, y2)<=y3) {
-                    added = true;
+                    f2 = true;
                 }
-                if (!added) {
-
-                }
+            }
+            if (!(f1 && f2)) {
+            	adj[i][j] = abs(x1-x2)+abs(y1-y2);
+            	adj[j][i] = adj[i][j];
             }
         }
     }
-    cout << "hi" << endl;
+
     return 0;
 
 }

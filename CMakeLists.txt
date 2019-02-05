@@ -3,6 +3,6 @@ project(usaco)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(usaco atlarge/atlarge.cpp)
+add_executable(usaco delivery/delivery.cpp)
 
 # usaco "problem_name"/"problem_name".cpp
