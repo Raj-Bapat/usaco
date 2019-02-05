@@ -44,6 +44,7 @@ struct pair_hash {
 std::unordered_set< std::pair<int, int>,  pair_hash> pts;
 
 bool checkpt(pair<int, int> a) {return pts.find(a) == pts.end();}
+int adj[510];
 
 int main(int argc, const char * argv[]) {
     ios_base :: sync_with_stdio(false);
@@ -86,6 +87,7 @@ int main(int argc, const char * argv[]) {
                 bool added = false;
                 if (max(x1, x2)>=x3 && y1 == y2 && min(x1, x2)<=x3) {
                     added = true;
+
                 }
                 if (max(y1, y2)>=y3 && x1 == x2 && min(y1, y2)<=y3) {
                     added = true;
