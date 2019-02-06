@@ -33,34 +33,75 @@ using namespace std;
 #endif
 
 
-int N, K;
-pair<int, int> cowpts[510];
+long long N, K;
+pair<long long, long long> cowpts[510];
 struct pair_hash {
-    inline std::size_t operator()(const std::pair<int,int> & v) const {
+    inline std::size_t operator()(const std::pair<long long,long long> & v) const {
         return v.first*31+v.second;
     }
 };
 
-std::unordered_set< std::pair<int, int>,  pair_hash> pts;
+long long sp[110][510];
 
-bool checkpt(pair<int, int> a) {return pts.find(a) == pts.end();}
-int adj[510][510];
+std::unordered_set< std::pair<long long, long long>,  pair_hash> pts;
+
+bool checkpt(pair<long long, long long> a) {return pts.find(a) == pts.end();}
+long long adj[510][510];
+
+long long addone(long long a) {
+    if (a == N-1) {
+        return 0;
+    } else {
+        return a+1;
+    }
+}
+
+void dijkstra(long long s) {
+    sp[s][s] = 0;
+    using pii = pair<long long, long long>;
+    priority_queue<pii, vector<pii>, greater<pii>> q;
+    q.push({0, s});
+    while (!q.empty()) {
+        long long v = q.top().second;
+        long long d_v = q.top().first;
+        q.pop();
+        if (d_v != sp[s][v]) {
+            continue;
+        }
+        for (long long i = 0; i<K; i++) {
+            if (i == v || adj[v][i] == numeric_limits<long long>::max() || (i<N && i != addone(s))) {
+                continue;
+            }
+            pair<long long, long long> edge = {i, adj[v][i]};
+            long long to = edge.first;
+            long long len = edge.second;
+            if (sp[s][v] + len < sp[s][to]) {
+                sp[s][to] = sp[s][v] + len;
+                q.push({sp[s][to], to});
+            }
+        }
+    }
+}
 
 int main(int argc, const char * argv[]) {
     ios_base :: sync_with_stdio(false);
     cin.tie(nullptr);
-    for (int i = 0; i<510; i++) {
-    	for (int j = 0; j<510; j++) {
-    		adj[i][j] = numeric_limits<int>::max();
+    for (long long i = 0; i<510; i++) {
+    	for (long long j = 0; j<510; j++) {
+    		adj[i][j] = numeric_limits<long long>::max();
     		adj[i][i] = 0;
+    		if (i<110) {
+    		    sp[i][j] = numeric_limits<long long>::max();
+    		}
     	}
     }
     cin >> N;
-    for (int i = 0; i<N; i++) {
+    for (long long i = 0; i<N; i++) {
         cin >> cowpts[i].first >> cowpts[i].second;
+        pts.insert(cowpts[i]);
     }
     K = N;
-    for (int i = 0; i<N; i++) {
+    for (long long i = 0; i<N; i++) {
         if (checkpt({cowpts[i].first+1, cowpts[i].second})) {
             cowpts[K] = {cowpts[i].first+1, cowpts[i].second};
             K++;
@@ -82,12 +123,12 @@ int main(int argc, const char * argv[]) {
             pts.insert({cowpts[i].first, cowpts[i].second-1});
         }
     }
-    for (int i = 0; i<K; i++) {
-        for (int j = i+1; j<K; j++) {
-            int x1 = cowpts[i].first, y1 = cowpts[i].second, x2 = cowpts[j].first, y2 = cowpts[j].second;
+    for (long long i = 0; i<K; i++) {
+        for (long long j = i+1; j<K; j++) {
+            long long x1 = cowpts[i].first, y1 = cowpts[i].second, x2 = cowpts[j].first, y2 = cowpts[j].second;
             bool f1 = false, f2 = false;
-            for (int k = 0; k<N; k++) {
-                int x3 = cowpts[k].first, y3 = cowpts[k].second;
+            for (long long k = 0; k<N; k++) {
+                long long x3 = cowpts[k].first, y3 = cowpts[k].second;
                 if ((x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3)) {
                     continue;
                 }
@@ -99,17 +140,28 @@ int main(int argc, const char * argv[]) {
                     f2 = true;
                 }
             }
-            int totint = f1+f2;
+            long long totint = f1+f2;
             if (totint<2 && !((x1 == x2 || y1 == y2) && totint>=1)) {
             	adj[i][j] = abs(x1-x2)+abs(y1-y2);
             	adj[j][i] = adj[i][j];
             }
         }
     }
-
+    for (long long i = 0; i<N; i++) {
+        dijkstra(i);
+    }
+    long long tot = 0;
+    for (long long i = 0; i<N; i++) {
+//        cout << sp[i][addone(i)] << endl;
+        tot+=sp[i][addone(i)];
+    }
+    if (tot<0) {    // overflow and checks for when it is not possible
+        cout << -1 << endl;
+        return 0;
+    }
+    cout << tot << endl;
     return 0;
 
 }
 
 
-`
