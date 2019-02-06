@@ -42,10 +42,6 @@ int dist(pair<int, int> a, pair<int, int> b) {
 }
 
 int f(int hc, int gc, bool isH) {
-//    for (int i = 0; i<spaces; i++) {
-//        D(cout << " ");
-//    }
-//    D(cout << hc << " " << gc << " " << isH << " " << path << endl);
     if (hc == H-1) {
         int lleg = dist(hcows[H-1], gcows[gc+1]);
         for (int i = gc+2; i<=G; i++) {
