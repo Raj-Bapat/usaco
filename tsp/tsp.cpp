@@ -26,7 +26,7 @@ using namespace std;
 #define MOD 1000000007
 
 short int dist[20][20];
-short int dp[1048576][20];
+short int dp[1<<20][20];
 short int N, M;
 
 int main() {
