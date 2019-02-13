@@ -25,26 +25,19 @@ using namespace std;
 #define inf 0x7fffffff
 #define MOD 1000000007
 
-short int dist[20][20];
-short int dp[1<<20][20];
+vector<int> adjlist[19];
+short dp[1<<19][19];
 short int N, M;
 
 int main() {
     ios_base :: sync_with_stdio(false);
     cin.tie(nullptr);
-    cout << sizeof(dp) << endl;
-//    cin >> N >> M;
-//    for (int i = 0; i<N; i++) {
-//        for (int j = 0; j<N; j++) {
-//            dist[i][j] = numeric_limits<int>::max();
-//        }
-//    }
-//    for (int i = 0; i<M; i++) {
-//        int a, b, c;
-//        cin >> a >> b >> c;
-//
-//    }
-    cout << 1 << endl;
+    cin >> N >> M;
+    for (int i = 0; i<M; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        adj
+    }
     return 0;
 }
 
