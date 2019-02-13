@@ -25,6 +25,7 @@ using namespace std;
 #define inf 0x7fffffff
 #define MOD 1000000007
 
+typedef adj adj;
 vector<int> adjlist[19];
 short dp[1<<19][19];
 short int N, M;
