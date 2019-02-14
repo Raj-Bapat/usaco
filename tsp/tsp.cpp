@@ -22,22 +22,44 @@ using namespace std;
 #else
 #define D(x)
 #endif
-#define inf 0x7fffffff
-#define MOD 1000000007
 
-typedef adj adj;
-vector<int> adjlist[19];
-short dp[1<<19][19];
-short int N, M;
+const int inf = 100000123;
+vector<pair<int, int>> adjlist[19];
+int dp[1<<19][19];
+int N, M;
+
+int f(int mask, int node) {
+    if (mask == (1<<N) - 1) {
+        return 0;
+    }
+    if (dp[mask][node] != inf) {
+        return dp[mask][node];
+    }
+    for (int i = 0; i<adjlist[node].size(); i++) {
+        int v = adjlist[node][i].first;
+        dp[mask][node] = min(dp[mask][node], adjlist[node][i].second+f((mask | (i << v)), v));
+    }
+    return dp[mask][node];
+}
 
 int main() {
     ios_base :: sync_with_stdio(false);
     cin.tie(nullptr);
     cin >> N >> M;
+    for (int i = 0; i<(1<<N); i++) {
+        for (int j = 0; j<N; j++) {
+            dp[i][j] = inf;
+        }
+    }
     for (int i = 0; i<M; i++) {
         int a, b, c;
         cin >> a >> b >> c;
-        adj
+        adjlist[a].push_back({b,c});
+        adjlist[b].push_back({a,c});
+    }
+    int best = inf;
+    for (int i = 0; i<N; i++) {
+
     }
     return 0;
 }
