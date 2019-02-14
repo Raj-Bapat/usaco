@@ -37,7 +37,11 @@ int f(int mask, int node) {
     }
     for (int i = 0; i<adjlist[node].size(); i++) {
         int v = adjlist[node][i].first;
-        dp[mask][node] = min(dp[mask][node], adjlist[node][i].second+f((mask | (i << v)), v));
+        if (!(mask & (1 << v))) {
+            int thing = adjlist[node][i].second+f((mask | (1 << v)), v);
+            if (thing<dp[mask][node])
+            dp[mask][node] = thing;
+        }
     }
     return dp[mask][node];
 }
@@ -54,13 +58,16 @@ int main() {
     for (int i = 0; i<M; i++) {
         int a, b, c;
         cin >> a >> b >> c;
+        a--;
+        b--;
         adjlist[a].push_back({b,c});
         adjlist[b].push_back({a,c});
     }
     int best = inf;
     for (int i = 0; i<N; i++) {
-
+        best = min(best, f((0 | (1 << i)), i));
     }
+    cout << best << endl;
     return 0;
 }
 
