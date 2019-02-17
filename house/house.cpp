@@ -18,29 +18,40 @@
 using namespace std;
 
 int N,M;
-vector<int> adjlist[100010];
-int color[100010];
-unordered_set<int> pathsper[100010];
-vector<int> trees[100010];
-int currk = 0;
+int pathsper[100010];
+vector<int> paths[100010];
+pair<int, int> ans[100010];
+
+
+bool cmp(int a, int b) { return pathsper[a]>pathsper[b];}
 
 int main() {
     cin >> N >> M;
     for (int i = 0; i<M; i++) {
-        int si;
-        cin >> si;
-        int curr;
-        cin >> curr;
-        pathsper[curr].insert(i);
-        for (int j = 1; j<si; j++) {
-            int newcurr;
-            cin >> newcurr;
-            adjlist[curr].push_back(newcurr);
-            adjlist[newcurr].push_back(curr);
-            pathsper[newcurr].insert(i);
-            curr = newcurr;
+        int ci;
+        cin >> ci;
+        for (int j = 0; j<ci; j++) {
+            int next;
+            cin >> next;
+            pathsper[next]++;
+            paths[i].push_back(next);
         }
     }
-
+    for (int ii = 0; ii<M; ii++) {
+        sort(paths[ii].begin(), paths[ii].end(), cmp);
+        for (int i = 0; i<paths[ii].size(); i++) {
+            int curri = i;
+            while (curri+1<paths[ii].size() && pathsper[paths[ii][curri]] == pathsper[paths[ii][curri+1]]) {
+                curri++;
+            }
+            for (int j = i; j<=curri; j++) {
+                ans[paths[ii][j]] = {i, curri};
+            }
+            i = curri;
+        }
+    }
+    for (int i = 1; i<=N; i++) {
+        cout << ans[i].first << " " << ans[i].second << endl;
+    }
     return 0;
 }
