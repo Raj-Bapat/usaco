@@ -64,7 +64,7 @@ int f(int hc, int gc, bool isH) {
         return dp[hc][gc][isH];
     }
     if (isH) {
-        dp[hc][gc][isH] = min(d    ist(hcows[hc],hcows[hc+1])+f(hc+1, gc, 1), dist(hcows[hc],gcows[gc+1])+f(hc, gc+1, 0));
+        dp[hc][gc][isH] = min(dist(hcows[hc],hcows[hc+1])+f(hc+1, gc, 1), dist(hcows[hc],gcows[gc+1])+f(hc, gc+1, 0));
         return dp[hc][gc][isH];
     } else {
         dp[hc][gc][isH] = min(dist(gcows[gc],hcows[hc+1])+f(hc+1, gc, 1), dist(gcows[gc],gcows[gc+1])+f(hc, gc+1, 0));
