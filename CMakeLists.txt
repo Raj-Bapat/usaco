@@ -3,6 +3,6 @@ project(usaco)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(usaco something.cpp)
+add_executable(usaco lilypad/lilypad.cpp)
 
 # usaco "problem_name"/"problem_name".cpp
