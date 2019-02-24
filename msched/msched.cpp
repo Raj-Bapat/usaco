@@ -43,14 +43,18 @@ int ttm[10010];
 int incoming[10010];
 
 int main(int argc, const char * argv[]) {
+    ifstream fin;
+    ofstream fout;
+    fin.open("msched.in");
+    fout.open("msched.out");
     ios_base :: sync_with_stdio(false);
-    cin >> N >> M;
+    fin >> N >> M;
     for (int i = 1; i<=N; i++) {
-        cin >> ttm[i];
+        fin >> ttm[i];
     }
     for (int i = 0; i<M; i++) {
         int f,s;
-        cin >> f >> s;
+        fin >> f >> s;
         adjlist[f].push_back(s);
         incoming[s]++;
     }
@@ -78,7 +82,7 @@ int main(int argc, const char * argv[]) {
             }
         }
     }
-    cout << currtime << endl;
+    fout << currtime << endl;
     return 0;
 }
 
