@@ -42,6 +42,7 @@ bool inBounds(int x, int y) {
 
 void dfs(int x, int y) {
     visited[x][y] = true;
+    cout << "found " << x << " " << y << endl;
     for (int i = 0; i<4; i++) {
         int nx = x+dx[i];
         int ny = y+dy[i];
@@ -72,7 +73,6 @@ int f(int mask, int node) {
 }
 
 int main() {
-    ifstream fin;
     cin >> N >> M;
     for (int i = 0; i<(1<<17); i++) {
         for (int j = 0; j<17; j++) {
@@ -125,6 +125,7 @@ int main() {
                 dists[i][color[x][y]] = d;
                 dists[color[x][y]][i] = d;
             }
+            cout << x << " " << y << " " << d << visited[x][y] << endl;
             for (int j = 0; j<4; j++) {
                 int nx = x+dx[j];
                 int ny = y+dy[j];
