@@ -3,6 +3,6 @@ project(usaco)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(usaco harker/A.cpp)
+add_executable(usaco robots/robots.cpp)
 
-# usaco "problem_name"/"problem_name".cpp
+# usaco "problem_name"/"problem_name".cppx
