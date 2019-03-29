@@ -3,6 +3,6 @@ project(usaco)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(usaco mowlawn/mowlawn.cpp)
+add_executable(usaco mixup2/mixup2.cpp)
 
 # usaco "problem_name"/"problem_name".cpp
