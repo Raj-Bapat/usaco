@@ -3,6 +3,6 @@ project(usaco)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(usaco mixup2/mixup2.cpp)
+add_executable(usaco saving_energy/saving_energy.cpp)
 
 # usaco "problem_name"/"problem_name".cpp
