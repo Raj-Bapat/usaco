@@ -3,6 +3,6 @@ project(usaco)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(usaco binary_search_three/binary_search_three.cpp)
+add_executable(usaco rectangles/rectangles.cpp)
 
 # usaco "problem_name"/"problem_name".cpp
